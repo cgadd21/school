@@ -1,0 +1,32 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "MySQL",
+            "database": "candidateskills",
+            "username": "root",
+            "password": "student"
+        }
+    ],
+    "java.project.sourcePaths": [
+        "Exams\\Exam4"
+    ],
+    "java.project.referencedLibraries": {
+        "include": [
+            "lib/**/*.jar",
+            "Drivers\\mysql-connector-java-8.0.21.jar",
+            "Drivers\\mysql-connector-j-8.1.0.jar"
+        ],
+        "exclude": [
+            "Drivers/mysql-connector-java-8.0.21.jar"
+        ]
+    },
+    "java.debug.settings.onBuildFailureProceed": true
+}

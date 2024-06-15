@@ -1,0 +1,20 @@
+@* This file is used to display the Research page of the website. *@
+@model Project3.Models.ResearchViewModel
+@{
+  ViewData["Title"] = "Research";
+}
+
+<div id="Researchs">
+  <div id="Research">
+    @foreach (var research in Model.ByInterestArea)
+    {
+      <h1><a href="#@research.AreaName">@research.AreaName</a></h1>
+      <div>
+        @foreach (var citation in research.Citations)
+        {
+          <p>@citation</p>
+        }
+      </div>
+    }
+  </div>
+</div>

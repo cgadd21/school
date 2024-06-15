@@ -1,0 +1,85 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: whitesmoke;
+}
+
+div {
+  text-align: center;
+  padding: 20px;
+  margin: auto;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px black;
+  width: 90%;
+  max-width: 1000px;
+}
+
+form {
+  display: inline-grid;
+  padding: 5px;
+  margin: 10px;
+}
+
+select {
+  padding: 5px;
+  margin: 10px;
+}
+
+.welcome {
+  background-color: lightpink;
+  border: 5px solid pink;
+}
+
+.boss {
+  background-color: greenyellow;
+  border: 5px solid green;
+}
+
+.strategy {
+  background-color: gainsboro;
+  border: 5px solid gray;
+}
+
+.battle {
+  background-color: lightblue;
+  border: 5px solid blue;
+}
+
+.rating {
+  background-color: burlywood;
+  border: 5px solid yellow;
+}
+
+.stars,
+.save {
+  border: none;
+  box-shadow: none;
+}
+
+.star {
+  display: inline-block;
+  margin-right: 5px;
+  color: gray;
+  transition: color 0.3s;
+}
+
+.star.active {
+  color: yellow;
+}
+
+.star:hover {
+  color: yellow;
+  cursor: pointer;
+}
+
+.star.invalid {
+  color: red;
+}
+
+.name {
+  border: inherit;
+}
+
+.name.invalid {
+  border: 1px solid red;
+}

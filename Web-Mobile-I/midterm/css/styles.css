@@ -1,0 +1,59 @@
+/*organized by instructions*/
+body {
+    background-image: url(../images/united-nations.png); /*almost didn't get this*/
+    margin: 35px;
+    padding: 35px;
+    border: 5px solid red;
+    border-radius: 15px;
+
+    font-family: cambria, georgia, serif;
+    color: darkslategray;
+    line-height: 1.75;
+
+}
+
+header, section, footer {
+    border-bottom: black solid 1px;
+    overflow: auto;
+}
+
+header {
+    margin-bottom: 0%;
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+figure {
+    float: right;
+    border: black solid 1px;
+    padding: 15px;
+    background-color: white;
+}
+
+figcaption {
+    font-style: italic;
+}
+
+a {
+    color: #623B5A;
+    padding: 6px;
+    text-decoration: none;
+}
+
+a:hover {
+    background-color: #C8FFBE;
+}
+
+#lead {
+    border-left: black solid 1px;
+    padding-left: 15px;
+
+    font-size: 18px;
+    font-style: italic;
+}
+
+#lead strong {
+    color: red;
+}
+
+

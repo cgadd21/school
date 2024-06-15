@@ -1,0 +1,35 @@
+@* This file is used to display the Minors page of the website. *@
+@model Project3.Models.MinorsViewModel
+@{
+  ViewData["Title"] = "Minors";
+}
+
+<div id="Minors">
+  <h1>Undergraduate</h1>
+  <div id="UndergraduateMinors">
+    @foreach (var undergraduate in Model.UgMinors)
+    {
+      <h2>
+        @undergraduate.Title
+      </h2>
+      <div>
+        <p>@undergraduate.Description</p>
+        <div>
+          <h3>@undergraduate.Name Courses</h3>
+          <ul>
+            @foreach (var course in undergraduate.Courses)
+            {
+              <a href="@Url.Action("Course", "Home", new { id = @course })">
+                <li>@course</li>
+              </a>
+            }
+          </ul>
+          @if (!String.IsNullOrEmpty(undergraduate.Note))
+          {
+            <p>@undergraduate.Note</p>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,102 @@
+@* This file is used to display the Employment page of the website. *@
+@model Project3.Models.EmploymentViewModel
+@{
+  ViewData["Title"] = "Employment";
+}
+
+<div id="Employments">
+  <div id="Employment">
+    <ul>
+      <li><a href="#Introduction">Introduction</a></li>
+      <li><a href="#DegreeStatistics">Degree Statistics</a></li>
+      <li><a href="#Employers">Employers</a></li>
+      <li><a href="#Careers">Careers</a></li>
+      <li><a href="#CoopTable">Co-op Table</a></li>
+      <li><a href="#EmploymentTable">Employment Table</a></li>
+      <li><a href="#EmploymentMap">Employment Map</a></li>
+    </ul>
+    <div id="Introduction">
+      <h1>@Model.Introduction.Title</h1>
+      @foreach (var content in Model.Introduction.Content)
+      {
+        <h2>@content.Title</h2>
+        <p>@content.Description</p>
+      }
+    </div>
+    <div id="DegreeStatistics">
+      <h1>@Model.DegreeStatistics.Title</h1>
+      @foreach (var stat in Model.DegreeStatistics.Statistics)
+      {
+        <h2>@stat.Value</h2>
+        <p>@stat.Description</p>
+      }
+    </div>
+    <div id="Employers">
+      <h1>@Model.Employers.Title</h1>
+      @foreach (var employer in Model.Employers.EmployerNames)
+      {
+        <p>@employer</p>
+      }
+    </div>
+    <div id="Careers">
+      <h1>@Model.Careers.Title</h1>
+      @foreach (var career in Model.Careers.CareerNames)
+      {
+        <p>@career</p>
+      }
+    </div>
+    <div id="CoopTable">
+      <h1>@Model.CoopTable.Title</h1>
+      <table id="CT" class="display">
+        <thead>
+          <tr>
+            <th>Employer</th>
+            <th>Degree</th>
+            <th>City</th>
+            <th>Term</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach (var coop in Model.CoopTable.CoopInformation)
+          {
+            <tr>
+              <td>@coop.Employer</td>
+              <td>@coop.Degree</td>
+              <td>@coop.City</td>
+              <td>@coop.Term</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <div id="EmploymentTable">
+      <h1>@Model.EmploymentTable.Title</h1>
+      <table id="ET" class="display">
+        <thead>
+          <tr>
+            <th>Employer</th>
+            <th>Degree</th>
+            <th>City</th>
+            <th>Title</th>
+            <th>Start Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach (var employment in Model.EmploymentTable.ProfessionalEmploymentInformation)
+          {
+            <tr>
+              <td>@employment.Employer</td>
+              <td>@employment.Degree</td>
+              <td>@employment.City</td>
+              <td>@employment.Title</td>
+              <td>@employment.StartDate.ToShortDateString()</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <div id="EmploymentMap">
+      <iframe src="https://ischool.gccis.rit.edu/api/map.php"></iframe>
+    </div>
+  </div>
+</div>

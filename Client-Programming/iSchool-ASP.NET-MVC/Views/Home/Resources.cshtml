@@ -1,0 +1,110 @@
+@* This file is used to display the Resources page of the website. *@
+@model Project3.Models.ResourcesViewModel
+@{
+  ViewData["Title"] = "Resources";
+}
+
+<div id="Resources">
+  <h1>@Model.Title</h1>
+  <p>@Model.SubTitle</p>
+  <div id="Resource">
+    <ul>
+      <li><a href="#StudyAbroad">Study Abroad</a></li>
+      <li><a href="#StudentServices">Student Services</a></li>
+      <li><a href="#TutorsAndLabInformation">Tutors And Lab Information</a></li>
+      <li><a href="#StudentAmbassadors">Student Ambassadors</a></li>
+      <li><a href="#Forms">Forms</a></li>
+      <li><a href="#CoopEnrollment">Co-op Enrollment</a></li>
+    </ul>
+    <div id="StudyAbroad">
+      <h2>@Model.StudyAbroad.Title</h2>
+      <p>@Model.StudyAbroad.Description</p>
+      @foreach (var place in Model.StudyAbroad.Places)
+      {
+        <h3>@place.NameOfPlace</h3>
+        <p>@place.Description</p>
+      }
+    </div>
+    <div id="StudentServices">
+      <h2>@Model.StudentServices.Title</h2>
+      <div id="AcademicAdvisors">
+        <h3>@Model.StudentServices.AcademicAdvisors.Title</h3>
+        <p>@Model.StudentServices.AcademicAdvisors.Description</p>
+        <a href=@Model.StudentServices.AcademicAdvisors.Faq.ContentHref>
+          @Model.StudentServices.AcademicAdvisors.Faq.Title
+        </a>
+      </div>
+      <div id="ProfessonalAdvisors">
+        <h3>@Model.StudentServices.ProfessonalAdvisors.Title</h3>
+        <div id="AdvisorInformation">
+          @foreach (var advisor in Model.StudentServices.ProfessonalAdvisors.AdvisorInformation)
+          {
+            <h4>@advisor.Name</h4>
+            <p>@advisor.Department</p>
+            <p>@advisor.Email</p>
+          }
+        </div>
+        <div id="FacultyAdvisors">
+          <h3>@Model.StudentServices.FacultyAdvisors.Title</h3>
+          <p>@Model.StudentServices.FacultyAdvisors.Description</p>
+        </div>
+        <div id="IstMinorAdvising">
+          <h3>@Model.StudentServices.IstMinorAdvising.Title</h3>
+          <div id="MinorAdvisorInformation">
+            @foreach (var advisor in Model.StudentServices.IstMinorAdvising.MinorAdvisorInformation)
+            {
+              <h4>@advisor.Title</h4>
+              <p>@advisor.Advisor</p>
+              <p>@advisor.Email</p>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="TutorsAndLabInformation">
+      <h3>@Model.TutorsAndLabInformation.Title</h3>
+      <p>@Model.TutorsAndLabInformation.Description</p>
+      <a href=@Model.TutorsAndLabInformation.TutoringLabHoursLink>Tutoring Hours</a>
+    </div>
+    <div id="StudentAmbassadors">
+      <h3>@Model.StudentAmbassadors.Title</h3>
+      <img src=@Model.StudentAmbassadors.AmbassadorsImageSource alt="StudentAmbassadors">
+      <div id="SubSectionContent">
+        @foreach (var subsection in Model.StudentAmbassadors.SubSectionContent)
+        {
+          <h4>@subsection.Title</h4>
+          <p>@subsection.Description</p>
+        }
+      </div>
+      <a href=@Model.StudentAmbassadors.ApplicationFormLink>Application Form</a>
+      <p>@Model.StudentAmbassadors.Note</p>
+    </div>
+    <div id="Forms">
+      <div id="GraduateForms">
+        <h3>Graduate Forms</h3>
+        @foreach (var graduateForm in Model.Forms.GraduateForms)
+        {
+          <a href=@graduateForm.Href>@graduateForm.FormName</a>
+        }
+      </div>
+      <div id="UndergraduateForms">
+        <h3>Undergraduate Forms</h3>
+        @foreach (var undergraduateForm in Model.Forms.UndergraduateForms)
+        {
+          <a href=@undergraduateForm.Href>@undergraduateForm.FormName</a>
+        }
+      </div>
+    </div>
+    <div id="CoopEnrollment">
+      <h3>@Model.CoopEnrollment.Title</h3>
+      <div id="EnrollmentInformationContent">
+        @foreach (var content in Model.CoopEnrollment.EnrollmentInformationContent)
+        {
+          <h4>@content.Title</h4>
+          <p>@content.Description</p>
+        }
+      </div>
+      <a href=@Model.CoopEnrollment.RITJobZoneGuidelink>RIT Job Zone Guide</a>
+    </div>
+  </div>
+</div>

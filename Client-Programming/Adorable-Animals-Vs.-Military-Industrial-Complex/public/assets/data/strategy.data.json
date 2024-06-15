@@ -1,0 +1,97 @@
+{
+  "question": "Select a strategy.",
+  "options": {
+    "landInvasion": {
+      "question": "Select your troops.",
+      "description": "Land Invasion",
+      "options": {
+        "infantry": {
+          "question": "Select infantry team.",
+          "description": "Infantry",
+          "options": {
+            "rifleTeam": {
+              "description": "Rifle Team",
+              "image": "./assets/images/rifleTeam.jpg",
+              "damage": 20,
+              "health": 70,
+              "squad": 5
+            },
+            "sniperTeam": {
+              "description": "Sniper Team",
+              "image": "./assets/images/sniperTeam.jpg",
+              "damage": 80,
+              "health": 40,
+              "squad": 3
+            }
+          }
+        },
+        "tank": {
+          "question": "Select tank type.",
+          "description": "Tanks",
+          "options": {
+            "lightTank": {
+              "description": "Light tanks",
+              "image": "./assets/images/lightTank.jpg",
+              "damage": 30,
+              "health": 150,
+              "squad": 5
+            },
+            "heavyTank": {
+              "description": "Heavy tanks",
+              "image": "./assets/images/heavyTank.jpg",
+              "damage": 40,
+              "health": 200,
+              "squad": 3
+            }
+          }
+        }
+      }
+    },
+    "aerialAssult": {
+      "question": "Select your aircraft.",
+      "description": "Aerial Assult",
+      "options": {
+        "fighterJet": {
+          "question": "Select your fighter jet type.",
+          "description": "Figher Jets",
+          "options": {
+            "f22Raptor": {
+              "description": "F-22 Raptors",
+              "image": "./assets/images/f22Raptor.jpg",
+              "damage": 50,
+              "health": 120,
+              "squad": 5
+            },
+            "su35Flanker": {
+              "description": "Su-35 Flankers",
+              "image": "./assets/images/su35Flanker.jpg",
+              "damage": 60,
+              "health": 100,
+              "squad": 3
+            }
+          }
+        },
+        "bomber": {
+          "question": "Select bomber type.",
+          "description": "Bomber",
+          "options": {
+            "strategicBombers": {
+              "description": "Strategic bombers",
+              "image": "./assets/images/strategicBombers.jpg",
+              "damage": 80,
+              "health": 160,
+              "squad": 5
+            },
+            "stealthBombers": {
+              "description": "Stealth bombers",
+              "image": "./assets/images/stealthBombers.jpg",
+              "damage": 70,
+              "health": 180,
+              "squad": 3
+            }
+          }
+        }
+      }
+    }
+  }
+}

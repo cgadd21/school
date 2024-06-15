@@ -1,0 +1,1602 @@
+openapi: '3.0.0'
+
+info:
+  version: '1'
+  title: 'Societies API'
+  description: |
+    This is the OpenAPI specification for the societies application. Authentication is handled by passing a Bearer token as the authorization header.
+tags:
+  - name: 'Auth'
+    description: 'Routes related to authentication'
+  - name: 'Elections'
+    description: 'Routes related to elections'
+  - name: 'Election Offices'
+    description: 'Routes related to election offices'
+  - name: 'Election Candidates'
+    description: 'Routes related to election candidates'
+  - name: 'Election Initiatives'
+    description: 'Routes related to election initiatves'
+  - name: 'Initiative Options'
+    description: 'Routes related to initiative options'
+  - name: 'Society Members'
+    description: 'Routes related to society members'
+  - name: 'Societies'
+    description: 'Routes related to societies'
+  - name: 'Report'
+    description: 'Routes related to reports'
+  - name: 'User'
+    description: 'Routes related to users'
+
+paths:
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      operationId: 'AuthLogin'
+      description: 'Log in using an email and a password'
+      requestBody:
+        description: "Log in given a user's authentication details"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLoginBody'
+      responses:
+        200:
+          description: 'Successful login'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+        400:
+          description: 'Invalid authentication details'
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/InvalidUsernameError'
+                  - $ref: '#/components/schemas/InvalidPasswordError'
+
+  /auth/logout:
+    post:
+      tags:
+        - Auth
+      operationId: 'AuthLogout'
+      description: 'Log out of and destroy an existing session'
+      responses:
+        200:
+          description: 'Successful logout'
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+      security:
+        - bearer: []
+
+  /auth/session:
+    get:
+      tags:
+        - Auth
+      operationId: 'AuthSession'
+      description: 'Retrieve the current session and user'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  session:
+                    $ref: '#/components/schemas/Session'
+                  user:
+                    $ref: '#/components/schemas/User'
+                  role:
+                    type: string
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+      security:
+        - bearer: []
+
+  /auth/society:
+    parameters:
+      - in: 'header'
+        name: 'society-id'
+        schema:
+          type: 'string'
+          example: 'The ID of the society you want to act on'
+    get:
+      tags:
+        - Auth
+      operationId: 'AuthSociety'
+      description: 'Retrieve the society that is currently selected'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Society'
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+      security:
+        - bearer: []
+
+  /v1/elections:
+    parameters:
+      - in: 'header'
+        name: 'society-id'
+        schema:
+          type: 'string'
+          example: 'The ID of the society you want to act on'
+    get:
+      tags:
+        - Elections
+      operationId: 'ListElections'
+      description: 'List all elections'
+      parameters:
+        - in: 'query'
+          name: 'time'
+          schema:
+            type: 'string'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: 'array'
+                items:
+                  $ref: '#/components/schemas/Election'
+        400:
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestError'
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+      security:
+        - bearer: []
+    post:
+      tags:
+        - Elections
+      operationId: 'CreateElection'
+      description: 'Create an election'
+      requestBody:
+        description: 'Create an election with these parameters'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Election'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Election'
+        400:
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestError'
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+      security:
+        - bearer: []
+
+  /v1/elections/{election_id}:
+    parameters:
+      - in: 'path'
+        name: 'election_id'
+        required: true
+        schema:
+          type: 'string'
+      - in: 'header'
+        name: 'society-id'
+        schema:
+          type: 'string'
+          example: 'The ID of the society you want to act on'
+    put:
+      tags:
+        - Elections
+      operationId: 'UpdateElection'
+      description: 'Update an election by id'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Election'
+        400:
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestError'
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+      security:
+        - bearer: []
+
+    get:
+      tags:
+        - Elections
+      operationId: 'RetrieveElection'
+      description: 'Retrieve an election by id'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Election'
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+        404:
+          description: 'Not Found'
+      security:
+        - bearer: []
+
+  /v1/elections/{election_id}/ballot:
+    parameters:
+      - in: 'path'
+        name: 'election_id'
+        required: true
+        schema:
+          type: 'string'
+      - in: 'header'
+        name: 'society-id'
+        schema:
+          type: 'string'
+          example: 'The ID of the society you want to act on'
+    get:
+      tags:
+        - Elections
+      operationId: 'RetrieveElectionBallot'
+      description: 'Retrieve election ballot'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ballot'
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+        404:
+          description: 'Not Found'
+      security:
+        - bearer: []
+    post:
+      tags:
+        - Elections
+      operationId: 'SubmitElectionBallot'
+      description: 'Submit election ballot'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: 'Vote Submitted'
+        400:
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestError'
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+        404:
+          description: 'Not Found'
+      security:
+        - bearer: []
+
+  /v1/elections/{election_id}/election_offices:
+    parameters:
+      - in: 'path'
+        name: 'election_id'
+        required: true
+        schema:
+          type: 'string'
+      - in: 'header'
+        name: 'society-id'
+        schema:
+          type: 'string'
+          example: 'The ID of the society you want to act on'
+
+    get:
+      tags:
+        - Election Offices
+      operationId: 'ListElectionOffices'
+      description: 'List election offices'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: 'array'
+                items:
+                  $ref: '#/components/schemas/ElectionOffice'
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+      security:
+        - bearer: []
+
+    post:
+      tags:
+        - Election Offices
+      operationId: 'CreateElectionOffice'
+      description: 'Create an election office'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ElectionOffice'
+        400:
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestError'
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+      security:
+        - bearer: []
+
+  /v1/elections/election_offices/{office_id}:
+    parameters:
+      - in: 'path'
+        name: 'office_id'
+        required: true
+        schema:
+          type: 'string'
+
+    put:
+      tags:
+        - Election Offices
+      operationId: 'UpdateElectionOffice'
+      description: 'Update an election office'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ElectionOffice'
+        400:
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestError'
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+      security:
+        - bearer: []
+
+    get:
+      tags:
+        - Election Offices
+      operationId: 'RetrieveElectionOffice'
+      description: 'Retrieve an election office'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ElectionOffice'
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+        404:
+          description: 'Not Found'
+      security:
+        - bearer: []
+
+    delete:
+      tags:
+        - Election Offices
+      operationId: 'DeleteElectionOffice'
+      description: 'Delete an election office'
+      responses:
+        204:
+          description: 'No Content'
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+        404:
+          description: 'Not Found'
+      security:
+        - bearer: []
+
+  /v1/elections/{election_id}/election_offices/{office_id}/election_candidates:
+    parameters:
+      - in: 'path'
+        name: 'election_id'
+        required: true
+        schema:
+          type: 'string'
+      - in: 'path'
+        name: 'office_id'
+        required: true
+        schema:
+          type: 'string'
+      - in: 'path'
+        name: 'candidate_id'
+        required: true
+        schema:
+          type: 'string'
+      - in: 'header'
+        name: 'society-id'
+        example: 'The ID of the society you want to act on'
+        schema:
+          type: 'string'
+
+    get:
+      tags:
+        - Election Candidates
+      operationId: 'ListElectionCandidates'
+      description: 'List election candidates'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: 'array'
+                items:
+                  $ref: '#/components/schemas/ElectionCandidate'
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+      security:
+        - bearer: []
+
+    post:
+      tags:
+        - Election Candidates
+      operationId: 'CreateElectionCandidate'
+      description: 'Create an election candidate'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ElectionCandidate'
+        400:
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestError'
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+      security:
+        - bearer: []
+
+  /v1/elections/{election_id}/election_offices/{office_id}/election_candidates/{candidate_id}:
+    parameters:
+      - in: 'path'
+        name: 'election_id'
+        required: true
+        schema:
+          type: 'string'
+      - in: 'path'
+        name: 'office_id'
+        required: true
+        schema:
+          type: 'string'
+      - in: 'path'
+        name: 'candidate_id'
+        required: true
+        schema:
+          type: 'string'
+
+    put:
+      tags:
+        - Election Candidates
+      operationId: 'UpdateElectionCandidate'
+      description: 'Update an election candidate'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ElectionCandidate'
+        400:
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestError'
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+      security:
+        - bearer: []
+
+    get:
+      tags:
+        - Election Candidates
+      operationId: 'RetrieveElectionCandidate'
+      description: 'Retrieve an election candidate'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ElectionCandidate'
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+        404:
+          description: 'Not Found'
+      security:
+        - bearer: []
+
+    delete:
+      tags:
+        - Election Candidates
+      operationId: 'DeleteElectionCandidate'
+      description: 'Delete an election candidate'
+      responses:
+        204:
+          description: 'No Content'
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+        404:
+          description: 'Not Found'
+      security:
+        - bearer: []
+
+  /v1/elections/{election_id}/election_initiatives:
+    parameters:
+      - in: 'path'
+        name: 'election_id'
+        required: true
+        description: 'The ID of the election this office should belong to'
+        schema:
+          type: 'string'
+      - in: 'header'
+        name: 'society-id'
+        example: 'The ID of the society you want to act on'
+        schema:
+          type: 'string'
+    get:
+      tags:
+        - Election Initiatives
+      operationId: 'ListElectionInitiatives'
+      description: 'List election initiatives'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: 'array'
+                items:
+                  $ref: '#/components/schemas/ElectionInitiative'
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+      security:
+        - bearer: []
+    post:
+      tags:
+        - Election Initiatives
+      operationId: 'CreateElectionInitiative'
+      description: 'Create an election initiative'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ElectionInitiative'
+        400:
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestError'
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+      security:
+        - bearer: []
+
+  /v1/elections/{election_id}/election_initiatives/{initiative_id}:
+    parameters:
+      - in: 'path'
+        name: 'initiative_id'
+        required: true
+        schema:
+          type: 'string'
+      - in: 'path'
+        name: 'election_id'
+        required: true
+        schema:
+          type: 'string'
+
+    put:
+      tags:
+        - Election Initiatives
+      operationId: 'UpdateElectionInitiative'
+      description: 'Update an election initiative'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ElectionInitiative'
+        400:
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestError'
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+      security:
+        - bearer: []
+
+    get:
+      tags:
+        - Election Initiatives
+      operationId: 'RetrieveElectionInitiative'
+      description: 'Retrieve an election initiative'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ElectionInitiative'
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+        404:
+          description: 'Not Found'
+      security:
+        - bearer: []
+
+    delete:
+      tags:
+        - Election Initiatives
+      operationId: 'DeleteElectionInitiative'
+      description: 'Delete an election initiative'
+      responses:
+        204:
+          description: 'No Content'
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+        404:
+          description: 'Not Found'
+      security:
+        - bearer: []
+
+  /v1/elections/{election_id}/election_initiatives/{initiative_id}/initiative_options:
+    parameters:
+      - in: 'path'
+        name: 'option_id'
+        required: true
+        schema:
+          type: 'string'
+      - in: 'path'
+        name: 'election_id'
+        required: true
+        schema:
+          type: 'string'
+      - in: 'path'
+        name: 'initiative_id'
+        required: true
+        schema:
+          type: 'string'
+      - in: 'header'
+        name: 'society-id'
+        example: 'The ID of the society you want to act on'
+        schema:
+          type: 'string'
+    get:
+      tags:
+        - Initiative Options
+      operationId: 'ListInitiativeOptions'
+      description: 'List initiative options'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: 'array'
+                items:
+                  $ref: '#/components/schemas/InitiativeOption'
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+      security:
+        - bearer: []
+    post:
+      tags:
+        - Initiatives Option
+      operationId: 'CreateInitiativeOptions'
+      description: 'Create an initiative options'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InitiativeOption'
+        400:
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestError'
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+      security:
+        - bearer: []
+
+  /v1/elections/{election_id}/election_initiatives/{initiative_id}/initiative_options/{option_id}:
+    parameters:
+      - in: 'path'
+        name: 'option_id'
+        required: true
+        schema:
+          type: 'string'
+      - in: 'path'
+        name: 'election_id'
+        required: true
+        schema:
+          type: 'string'
+      - in: 'path'
+        name: 'initiative_id'
+        required: true
+        schema:
+          type: 'string'
+      - in: 'path'
+        name: 'option_id'
+        required: true
+        schema:
+          type: 'string'
+
+    put:
+      tags:
+        - Initiative Options
+      operationId: 'UpdateInitiativeOptions'
+      description: 'Update an initiative options'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InitiativeOption'
+        400:
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestError'
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+      security:
+        - bearer: []
+
+    get:
+      tags:
+        - Initiative Options
+      operationId: 'RetrieveInitiativeOptions'
+      description: 'Retrieve an initiative options'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InitiativeOption'
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+        404:
+          description: 'Not Found'
+      security:
+        - bearer: []
+
+    delete:
+      tags:
+        - Initiative Options
+      operationId: 'DeleteInitiativeOptions'
+      description: 'Delete an initiative options'
+      responses:
+        204:
+          description: 'No Content'
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+        404:
+          description: 'Not Found'
+      security:
+        - bearer: []
+
+  /v1/society_members:
+    parameters:
+      - in: 'header'
+        required: true
+        name: 'society_id'
+        schema:
+          type: 'string'
+          example: 'The ID of the society you want to act on'
+
+    get:
+      tags:
+        - Society Members
+      operationId: 'ListSocietyMembers'
+      description: 'List society members'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: 'array'
+                items:
+                  $ref: '#/components/schemas/SocietyMember'
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+      security:
+        - bearer: []
+
+    post:
+      tags:
+        - Society Members
+      operationId: 'CreateSocietyMembers'
+      description: 'Create a society member'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SocietyMember'
+        400:
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestError'
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+      security:
+        - bearer: []
+
+  /v1/societies:
+    parameters:
+      - in: 'query'
+        name: 'search'
+        schema:
+          type: 'string'
+    get:
+      tags:
+        - Societies
+      operationId: 'ListSocieties'
+      description: 'List societies'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: 'array'
+                items:
+                  type: 'object'
+                  properties:
+                    owner:
+                      oneOf:
+                        - $ref: '#/components/schemas/User'
+                    id:
+                      type: 'integer'
+                    name:
+                      type: 'string'
+                    ownerId:
+                      type: 'integer'
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+      security:
+        - bearer: []
+
+  /v1/societies/{society_id}:
+    parameters:
+      - in: 'path'
+        required: true
+        name: 'society_id'
+        schema:
+          type: 'string'
+    get:
+      tags:
+        - Societies
+      operationId: 'RetrieveSocieties'
+      description: 'Retrieve societies'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: 'array'
+                items:
+                  $ref: '#/components/schemas/Society'
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+      security:
+        - bearer: []
+
+  /v1/report/society:
+    parameters:
+      - in: 'header'
+        required: true
+        name: 'society_id'
+        schema:
+          type: 'string'
+    get:
+      tags:
+        - Report
+      operationId: 'SocietyReport'
+      description: 'Society Report'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: 'object'
+                properties:
+                  activeBallots:
+                    type: 'integer'
+                  inActiveBallots:
+                    type: 'integer'
+                  societyUsers:
+                    type: 'integer'
+                  averageVotingMembers:
+                    type: 'number'
+                    format: 'float'
+
+  /v1/report/system:
+    get:
+      tags:
+        - Report
+      operationId: 'SystemReport'
+      description: 'System Report'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: 'object'
+                properties:
+                  loggedInUsers:
+                    type: 'integer'
+                  activeElections:
+                    type: 'integer'
+                  averageQueryTime:
+                    type: 'number'
+                    format: 'float'
+                  averageHttpResponseTime:
+                    type: 'number'
+                    format: 'float'
+
+  /v1/report/status/{election_id}:
+    parameters:
+      - in: 'path'
+        required: true
+        name: 'election_id'
+        schema:
+          type: 'string'
+    get:
+      tags:
+        - Report
+      operationId: 'ElectionStatusReport'
+      description: 'Election Status Report'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: 'object'
+                properties:
+                  totalVotes:
+                    type: 'integer'
+                  votingMembers:
+                    type: 'array'
+                    items:
+                      type: 'object'
+                      properties:
+                        firstName:
+                          type: 'string'
+                        lastName:
+                          type: 'string'
+                  nonVotingMembers:
+                    type: 'array'
+                    items:
+                      type: 'object'
+                      properties:
+                        firstName:
+                          type: 'string'
+                        lastName:
+                          type: 'string'
+                  votingMemberPercentage:
+                    type: 'number'
+
+  /v1/report/results/{election_id}:
+    parameters:
+      - in: 'path'
+        required: true
+        name: 'election_id'
+        schema:
+          type: 'string'
+    get:
+      tags:
+        - Report
+      operationId: 'ResultsReport'
+      description: 'Results Report'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: 'object'
+                properties:
+                  officeResults:
+                    type: 'array'
+                    items:
+                      $ref: '#/components/schemas/OfficeResult'
+                  initiativeResults:
+                    type: 'array'
+                    items:
+                      $ref: '#/components/schemas/InitiativeResult'
+
+  /v1/users:
+    get:
+      tags:
+        - User
+      operationId: ListUsers
+      description: List users
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: 'array'
+                items:
+                  $ref: '#/components/schemas/Usr'
+      security:
+        - bearer: []
+
+  /v1/user:
+    post:
+      tags:
+        - User
+      operationId: CreateUser
+      description: Create User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      security:
+        - bearer: []
+
+  /v1/user/{userId}:
+    put:
+      tags:
+        - User
+      operationId: UpdateUser
+      description: Update User
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      security:
+        - bearer: []
+    get:
+      tags:
+        - User
+      operationId: RetrieveUser
+      description: Retrieve User
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      security:
+        - bearer: []
+
+components:
+  securitySchemes:
+    bearer:
+      type: 'http'
+      scheme: 'bearer'
+  schemas:
+    # Primitives
+    User:
+      properties:
+        id:
+          nullable: false
+          type: 'integer'
+          readOnly: true
+        email:
+          nullable: false
+          type: 'string'
+        first_name:
+          nullable: false
+          type: 'string'
+        last_name:
+          nullable: false
+          type: 'string'
+    Session:
+      properties:
+        id:
+          nullable: false
+          type: 'integer'
+          readOnly: true
+        user_id:
+          nullable: false
+          type: 'integer'
+          readOnly: true
+        token:
+          nullable: false
+          type: 'string'
+          readOnly: true
+        expires_at:
+          nullable: false
+          type: 'number'
+          readOnly: true
+    Society:
+      properties:
+        id:
+          nullable: false
+          type: 'integer'
+          readOnly: true
+        name:
+          nullable: false
+          type: 'string'
+        owner:
+          nullable: false
+          type: 'integer'
+    SocietyMember:
+      properties:
+        id:
+          nullable: false
+          type: 'integer'
+          readOnly: true
+        user_id:
+          nullable: false
+          type: 'integer'
+        society_id:
+          nullable: false
+          type: 'integer'
+        role:
+          nullable: false
+          type: 'string'
+          enum:
+            - 'member'
+            - 'officer'
+            - 'employee'
+    Election:
+      properties:
+        id:
+          nullable: false
+          type: 'integer'
+          readOnly: true
+        name:
+          nullable: false
+          type: 'string'
+        society_id:
+          nullable: false
+          type: 'integer'
+          readOnly: true
+        start_date:
+          nullable: false
+          type: 'number'
+        end_date:
+          nullable: false
+          type: 'number'
+        photo_url:
+          nullable: true
+          type: 'string'
+    ElectionOffice:
+      properties:
+        id:
+          nullable: false
+          type: 'integer'
+          readOnly: true
+        election_id:
+          nullable: false
+          type: 'integer'
+          description: 'The id of the election this office belongs to'
+        office_name:
+          nullable: false
+          type: 'string'
+          example: 'The White House'
+        max_votes:
+          nullable: false
+          type: 'integer'
+          example: '5'
+    ElectionCandidate:
+      properties:
+        id:
+          nullable: false
+          type: 'integer'
+          readOnly: true
+        election_office_id:
+          nullable: false
+          type: 'integer'
+          description: 'The id of the election office this candidate is running for'
+        name:
+          nullable: false
+          type: 'string'
+          example: 'John Doe'
+        photo_url:
+          nullable: false
+          type: 'string'
+          example: 'https://imgur.io/_________'
+        description:
+          nullable: false
+          type: 'string'
+          example: 'John Doe was born in 1985 in .......'
+    CandidateVote:
+      properties:
+        id:
+          nullable: false
+          type: 'integer'
+          readOnly: true
+        member_id:
+          nullable: false
+          type: 'integer'
+        election_candidate_id:
+          nullable: false
+          type: 'integer'
+    ElectionInitiative:
+      properties:
+        id:
+          nullable: false
+          type: 'integer'
+          readOnly: true
+        election_id:
+          nullable: false
+          type: 'integer'
+        initiative_name:
+          nullable: false
+          type: 'string'
+        description:
+          nullable: false
+          type: 'string'
+    InitiativeOption:
+      properties:
+        id:
+          nullable: false
+          type: 'integer'
+          readOnly: true
+        election_initiative_id:
+          nullable: false
+          type: 'integer'
+        title:
+          nullable: false
+          type: 'string'
+    InitiativeVote:
+      properties:
+        id:
+          nullable: false
+          type: 'integer'
+          readOnly: true
+        member_id:
+          nullable: false
+          type: 'integer'
+        election_initiative_id:
+          nullable: false
+          type: 'integer'
+        election_initiative_option_id:
+          nullable: false
+          type: 'integer'
+    Ballot:
+      allOf:
+        - $ref: '#/components/schemas/Election'
+        - type: object
+          properties:
+            offices:
+              type: array
+              items:
+                allOf:
+                  - $ref: '#/components/schemas/ElectionOffice'
+                  - type: object
+                    properties:
+                      candidates:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/ElectionCandidate'
+            initiatives:
+              type: array
+              items:
+                allOf:
+                  - $ref: '#/components/schemas/ElectionInitiative'
+                  - type: object
+                    properties:
+                      options:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/InitiativeOption'
+    OfficeResult:
+      type: 'object'
+      properties:
+        candidate:
+          nullable: false
+          type: 'string'
+        office:
+          nullable: false
+          type: 'string'
+        voteCount:
+          nullable: false
+          type: 'integer'
+    InitiativeResult:
+      type: 'object'
+      properties:
+        title:
+          nullable: false
+          type: 'string'
+        initiative:
+          nullable: false
+          type: 'string'
+        voteCount:
+          nullable: false
+          type: 'integer'
+
+    # Request bodies
+    CreateLoginBody:
+      properties:
+        email:
+          nullable: false
+          type: 'string'
+        password:
+          nullable: false
+          type: 'string'
+
+    # Error types
+    UnauthorizedError:
+      properties:
+        error:
+          nullable: false
+          type: 'boolean'
+          example: true
+          readOnly: true
+        type:
+          nullable: false
+          type: 'string'
+          readOnly: true
+          example: 'invalid_authorization_header'
+        message:
+          nullable: false
+          type: 'string'
+          readOnly: true
+          example: 'Please make sure you are passing a bearer token in your authorization header'
+    InvalidRequestError:
+      properties:
+        error:
+          nullable: false
+          type: 'boolean'
+          example: true
+          readOnly: true
+        type:
+          nullable: false
+          type: 'string'
+          readOnly: true
+          example: 'invalid_request_error'
+        message:
+          nullable: false
+          type: 'string'
+          readOnly: true
+          example: 'Invalid request body. Please check your PUT parameters and try again.'
+    InvalidUsernameError:
+      properties:
+        error:
+          nullable: false
+          type: 'boolean'
+          example: true
+          readOnly: true
+        message:
+          nullable: false
+          type: 'string'
+          example: 'Invalid username'
+          readOnly: true
+        type:
+          nullable: false
+          type: 'string'
+          example: 'invalid_username_error'
+          readOnly: true
+    InvalidPasswordError:
+      properties:
+        error:
+          nullable: false
+          type: 'boolean'
+          example: true
+          readOnly: true
+        message:
+          nullable: false
+          type: 'string'
+          example: 'Invalid password'
+          readOnly: true
+        type:
+          nullable: false
+          type: 'string'
+          example: 'invalid_password_error'
+          readOnly: true

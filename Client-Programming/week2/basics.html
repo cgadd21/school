@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <script>
+      "use strict";
+      //stops stupid things
+
+      //scope tests
+      // console.log('test with let');
+      // let x = 0;
+
+      // function letTest() {
+      //     //let x = 12;
+      //     console.log('in the func: ', x);
+      //     x = 13;
+      // }
+
+      // console.log('from before the func: ', x);
+      // letTest();
+      // console.log('after the func: ', x);
+
+      console.log("test with var");
+      var x = 0;
+
+      function varTest() {
+        var x = 12;
+        console.log("in the func: ", x);
+        console.log("outside x", window.x);
+        //y = 13; //stopped from use strict
+      }
+
+      console.log("from before the func: ", x);
+      varTest();
+      console.log("after the func: ", x);
+      //console.log('other', y);
+
+      //array & obj
+
+      var myArr = ["peter", "paul", "mary"];
+      myArr[4] = "dan";
+
+      //myArr['first'] = 'fred'; //cant mix
+
+      var obj = {
+        name: ["dan", "scott", "bogaard"],
+        job: ["rit", "profess"],
+        funct: function (x) {
+          console.log(x);
+        },
+      };
+
+      console.log(obj.name[1]); //scott
+      console.log(obj["name"][1]); //scott
+
+      for (let i in obj) {
+        obj.funct(obj[i][0]);
+      }
+    </script>
+  </head>
+  <body></body>
+</html>

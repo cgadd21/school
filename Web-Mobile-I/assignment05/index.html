@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Club</title>
+</head>
+<body>
+    
+    <h1>Chess Club Application</h1>
+
+    <form method="post" action="https://rkostin.com/iste-140/form-processor.php">
+        
+        <div>
+            <label for="name">Name: </label>
+            <input type="text" name="name" id="name">
+        </div>
+
+        <div>
+            <label for="email">Email: </label>
+            <input type="email" name="email" id="email" required>
+        </div>
+
+        <div>
+            <label for="phone">Phone: </label>
+            <input type="tel" name="phone" id="phone">
+        </div>
+        <br>
+
+        <fieldset>
+            <legend>Chess Questionnaire</legend>
+
+            
+            <h2>What life lessons of chess do you enjoy?</h2>
+            
+            <div>
+                <input type="checkbox" name="check1" id="check1" value="King & Queen">
+                <label for="check1">Difference between the king and the queen.</label>
+            </div>
+
+            <div>
+                <input type="checkbox" name="check2" id="check2" value="Important King">
+                <label for="check2">The king is the most important piece.</label>
+            </div>
+
+            <div>
+                <input type="checkbox" name="check3" id="check3" value="Failure">
+                <label for="check3">Learning from failure.</label>
+            </div>
+
+            <div>
+                <input type="checkbox" name="check4" id="check4" value="Forward">
+                <label for="check4">You can only move forward.</label>
+            </div>
+
+            <h2>How long have you been playing chess?</h2>
+            
+            <div>
+                <input type="radio" name="favSelect" id="favSelect1" value="less than 1">
+                <label for="favSelect1">Under 1 year</label>
+            </div>
+
+            <div>
+                <input type="radio" name="favSelect" id="favSelect2" value="1-4">
+                <label for="favSelect2">1-4 years</label>
+            </div>
+
+            <div>
+                <input type="radio" name="favSelect" id="favSelect3" value="5-9">
+                <label for="favSelect3">5-9 years</label>
+            </div>
+
+            <div>
+                <input type="radio" name="favSelect" id="favSelect4" value="more than 10">
+                <label for="favSelect4">Over 10 years</label>
+            </div>
+
+        </fieldset>
+
+        <div>
+            <label for="message">Tell us some opening tips.</label><br>
+            <textarea name="message" id="message"></textarea>
+        </div>
+
+        <input type="hidden" name="referrer" id="referrer" value="">
+
+        <input type="submit" value="Checkmate">
+    </form>
+
+    <script>
+        console.log(document.URL);
+        document.getElementById("referrer").value = document.URL;
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Cooper Gadd, ISTE-240, 2228 -->
+<!-- 7/9/2023 -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/styles03.css">
+    <title>Menu & Forms</title>
+</head>
+<body>
+
+    <header>
+        
+        <!-- Logo to the left of the menu -->
+        <div id="logo">
+            <p id="people">👥</p>
+            <p>Small Town</p>
+        </div>
+
+        <!-- Horizontal menu with 6 items as shown -->
+        <nav>
+            <ul>
+                <li>
+                    <div><a href="">Home</a></div>
+                    <ul>
+                        <li><a href="">Home 1</a></li>
+                        <li><a href="">Home 2</a></li>
+                        <li><a href="">Home 3</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div><a href="">Activities</a></div>
+                    <ul>
+                        <li><a href="">Activities 1</a></li>
+                        <li><a href="">Activities 2</a></li>
+                        <li><a href="">Activities 2</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div><a href="">Food</a></div>
+                    <ul>
+                        <li><a href="">Food 1</a></li>
+                        <li><a href="">Food 2</a></li>
+                        <li><a href="">Food 3</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div><a href="">Rest</a></div>
+                    <ul>
+                        <li><a href="">Rest 1</a></li>
+                        <li><a href="">Rest 2</a></li>
+                        <li><a href="">Rest 3</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div><a href="">People</a></div>
+                    <ul>
+                        <li><a href="">People 1</a></li>
+                        <li><a href="">People 2</a></li>
+                        <li><a href="">People 3</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div><a href="">Feedback</a></div>
+                    <ul>
+                        <li><a href="">Feedback 1</a></li>
+                        <li><a href="">Feedback 2</a></li>
+                        <li><a href="">Feedback 3</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Text (Please tell... ) and horizontal rule <hr/> -->
+    <h1>Please tell us about your visit:</h1>
+    <hr>
+    
+    <!-- HTML ‘form’ tag -->
+    <form action="" method="get">
+
+        <!-- Text and HTML input tag with type of ‘number’ -->
+        <label for="groupNum">How many in your group? 
+            <input id="groupNum" type="number" name="groupNum" value="1"/>
+        </label>
+
+        <!-- Text and HTML input tag with type of ‘date’ -->
+        <label for="inputDate">When did you Visit? 
+            <input id="inputDate" type="date" name="inputDate" />
+        </label>
+
+        <!-- HTML tag ‘fieldset’ with appropriate text  -->
+        <fieldset>
+            <legend>Favorite Place</legend>
+
+            <!-- Radio button group inside field set with appropriate text -->
+            <label>
+                <input id="baseballField" type="radio" id="baseballField" name="favPlace" value="baseballField" />
+                Baseball Field
+            </label>
+            <label>
+                <input id="museum" type="radio" id="museum" name="favPlace" value="museum" />
+                Museum
+            </label>
+            <label>
+                <input id="luigisItalianRestaurant" type="radio" id="luigisItalianRestaurant" name="favPlace" value="luigisItalianRestaurant" />
+                Luigis Italian Restaurant
+            </label>
+            <label>
+                <input id="momsHotel" type="radio" id="momsHotel" name="favPlace" value="momsHotel" />
+                Mom's Hotel
+            </label>
+            <label>
+                <input id="theYouthHostel" type="radio" id="theYouthHostel" name="favPlace" value="theYouthHostel" />
+                The Youth Hostel
+            </label>
+        </fieldset>
+
+        <!-- Text and HTML input tag with type of ‘range’  -->
+        <p>Overall Rate your visit to our small town:</p>
+        <label> 
+            0 
+            <input type="range" id="myRate" min="0" max="10" step="1" list="numRate" name="rate"/>
+            <datalist id="numRate">
+                <option value="0" label="0"></option>
+                <option value="1" label="1"></option>
+                <option value="2" label="2"></option>
+                <option value="3" label="3"></option>
+                <option value="4" label="4"></option>
+                <option value="5" label="5"></option>
+                <option value="6" label="6"></option>
+                <option value="7" label="7"></option>
+                <option value="8" label="8"></option>
+                <option value="9" label="9"></option>
+                <option value="10" label="10"></option>
+            </datalist>
+            10
+        </label>
+
+        <!-- HTML input tag with submit that when clicked sends all information to this page -->
+        <input type="submit" class="button" value="Submit"/>
+
+    </form>
+    
+    <!-- script to get current date -->
+    <script src="assets/js/date.js"></script>
+
+</body>
+</html>

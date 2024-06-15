@@ -1,0 +1,26 @@
+{
+    "java.project.referencedLibraries": {
+        "include": [
+            "lib/**/*.jar",
+            "src/JavaFX/javafx.base.jar",
+            "src/JavaFX/javafx.controls.jar",
+            "src/JavaFX/javafx.fxml.jar",
+            "src/JavaFX/javafx.graphics.jar",
+            "src/JavaFX/javafx.media.jar",
+            "src/JavaFX/javafx.swing.jar",
+            "src/JavaFX/javafx.web.jar",
+            "src/JavaFX/javafx-swt.jar",
+            "src/JavaFX/lib/javafx.base.jar",
+            "src/JavaFX/lib/javafx.controls.jar",
+            "src/JavaFX/lib/javafx.fxml.jar",
+            "src/JavaFX/lib/javafx.graphics.jar",
+            "src/JavaFX/lib/javafx.media.jar",
+            "src/JavaFX/lib/javafx.swing.jar",
+            "src/JavaFX/lib/javafx.web.jar",
+            "src/JavaFX/lib/javafx-swt.jar"
+        ],
+        "exclude": [
+            "c:\\Users\\mgrob\\Downloads\\openjfx-22.0.1_windows-x64_bin-sdk\\javafx-sdk-22.0.1\\lib\\javafx.web.jar"
+        ]
+    }
+}

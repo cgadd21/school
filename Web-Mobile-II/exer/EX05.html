@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Cooper Gadd, ISTE-240, 2228 -->
+<!-- 7/22/2023 -->
+<!--ISTE240 Exercise 5 – JavaScript Part 2 -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/EX05.css">
+    <title>JavaScript - Part 2</title>
+</head>
+<body>
+
+    <!-- a -->
+    <div>
+		<h2>JavaScript Exercise 5a </h2> 
+		<p id="text" style="position: absolute; left: 10px;top: 30px;">I move</p>
+	</div>
+	<div>
+		<button id="moveMe" onclick="jsMove()">Move the Text</button>
+	</div>
+    <hr>
+
+    <!-- b -->
+    <div>
+        <p class="exerTitle">JavaScript Exercise 5b</p>
+        <form id="regForm">
+            <input type="text" id="fname" placeholder="Boo"><br>
+            <input type="text" id="lname" placeholder="Radley"><br>
+            <input type="checkbox" id="dog"> I have a dog. (Check if you do)<br>
+            <input type="text" id="major" placeholder="major"><br>
+            <input type="button" onclick="howmany();" value="Count of inputs">
+        </form>
+    </div>
+    <hr>
+
+    <!-- c -->
+    <div id="colorChanger">
+    <h2>JavaScript Exercise 5c</h2> 
+        <form>
+            <select id="mySelect">
+                <option>Red</option>
+                <option>Green</option>
+                <option>Blue</option>
+                <option>Yellow</option>
+                <option>Orange</option>
+                <option>Purple</option>
+            </select>
+            <input type="button" onclick="colorchanger()" value="Color Changer">
+        </form>
+    </div>
+    <hr>
+
+    <!-- d -->
+    <div>
+		<h2>JavaScript Exercise 5d </h2> 
+	</div>
+	<div>
+		<p id="rb" onmouseover="turnColor()" onmouseout="turnBlack()">This sentence will turn the color selected in Exercise 5c when you mouseover it.</p>
+	</div>
+    <hr>
+
+    <!-- e -->
+    <div>
+		<h2>JavaScript Exercise 5e </h2> 
+	</div>
+	<form>
+		<input type="text" id="firstoperand" placeholder="First Operand"/><br>
+		<input type="text" id="secondoperand" placeholder="Second Operand"/><br>
+		<input type="button" onclick="divide()" value="Divide" />
+		<input type="button" onclick="multiply()" value="Multiply" />
+		<p>The answer: <span id="result"></span></p>
+	</form>
+
+    <script src="assets/js/EX05.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Course Homepage</title>
+
+    <script>$(document).ready(function(){
+        $(".picture").bxSlider({
+            slideWidth: 300, // set the width of your images
+            auto: true, // enable auto mode
+            captions: true, //turns on title
+            speed: 500 //speed up transitions
+        });
+        });</script>
+
+</head>
+<body>
+
+    <div class="container page-layout">
+
+        <header>
+            <h1>ITSE-140: Web and Mobile I</h1>
+        </header>
+
+        <aside>
+            <p>Welcome to Cooper Gadd's Web and Mobile I content homepage!
+                Inside you will find all the assignments, projects, and whatever else Professor Kostin decides I should throw in.
+                Every assignment <em>(so far)</em> has been coded with Microsoft Studio Code to create these HTML files.
+                <strong>Please enjoy the cites and please don't break anything.</strong>
+            </p>
+        </aside>
+
+        <div class="picture">
+            <div><img src="images/software.jpg" alt="Software Image" title="Software"></div>
+            <div><img src="images/code.jpg" alt="Code Image" title="Code"></div>
+            <div><img src="images/sql.jpg" alt="SQL Image" title="SQL"></div>
+            <div><img src="images/web.jpg" alt="Web Images" title="Code"></div>
+        </div>
+
+        <div class="nav">
+            <nav class="triple">
+
+            <div>
+                <h2>Assignments</h2>
+                <ul class="zebra">
+                    <li><a href="assignment01/index.html">Assignment 01: Hello World!</a></li>
+                    <li class="nonLink">Assignment 02: Course Homepage <em>(this webpage)</em></li>
+                    <li><a href="assignment03/index.html">Assignment 03: Personal Home Page</a></li>
+                    <li><a target="_blank" href="https://www.figma.com/file/nKaUKDia8ua7d0P17DWVG2/ISTE-140-Assignment-4?t=u6rdoDRx8hcN0aXP-0">Assignment04: Wireframes</a></li>
+                    <li><a href="assignment05/index.html">Assignment05: Basic HTML Form</a></li>
+                    <li><a href="assignment06/index.html">Assignment 06: Styled Personal Home Page</a></li>
+                    <li><a href="assignment07/index.html">Assignment 07: Page Layout</a></li>
+                    <li><a href="assignment07a/index.html">Assignment 07a: Page Layout(extra credit)</a></li>
+                    <li><a href="assignment08/index.html">Assignment 08: Responsive Web Design</a></li>
+                    <li class="nonLink">Assignment 09: JavaScript Libraries and Plugins</li>
+                </ul>
+            </div>
+
+            <div>
+                <h2>Projects</h2>
+                <ul class="zebra">
+                    <li><a target="_blank" href="project1/Cooper_Gadd_Project1.pdf">Project 1: Research (PDF)</a></li>
+                    <li><a href="project2/index.html">Project 2: Styled Web Document</a></li>
+                    <li><a href="project3/index.php">Project 3: Multipage Website</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h2>Exams</h2>
+                <ul class="zebra">
+                    <li><a href="midterm/index.html">Midterm Practical Exam</a></li>
+                    <li class="nonLink">Final Practical Exam (canceled)</li>
+                </ul>
+            </div>
+
+            </nav>
+        </div>
+
+    </div> <!-- .container -->
+
+</body>
+</html>

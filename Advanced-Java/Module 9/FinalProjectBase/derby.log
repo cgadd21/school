@@ -1,0 +1,10 @@
+----------------------------------------------------------------
+Mon Nov 14 15:19:53 EST 2022D001 : [0] The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046), [1] a816c00e-0184-77cc-6020-00000e8adb68, [2] C:\Users\Candy\Desktop\Work\Fall 2022\CSC 225\Lab Base Projects\FinalProjectBase\CatDatabase, [3] jdk.internal.loader.ClassLoaders$AppClassLoader@378bf509, [4] file:/C:/Users/Candy/.m2/repository/org/apache/derby/derby/10.16.1.1/derby-10.16.1.1.jar
+java.vendor=Oracle Corporation
+java.runtime.version=17.0.3.1+2-LTS-6
+user.dir=C:\Users\Candy\Desktop\Work\Fall 2022\CSC 225\Lab Base Projects\FinalProjectBase
+os.name=Windows 11
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+C005 : [0] 

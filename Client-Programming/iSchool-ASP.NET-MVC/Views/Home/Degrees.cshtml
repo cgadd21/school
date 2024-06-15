@@ -1,0 +1,77 @@
+@* This file is used to display the Degrees page of the website. *@
+@model Project3.Models.DegreesViewModel
+@{
+  ViewData["Title"] = "Degrees";
+}
+
+<div id="Degrees">
+  <h1>Undergraduate</h1>
+  <div id="UndergraduateDegrees">
+    @foreach (var undergraduate in Model.Undergraduate)
+    {
+      <h2>
+        @undergraduate.Title
+        (@undergraduate.DegreeName.ToUpper())
+      </h2>
+      <div>
+        <p>@undergraduate.Description</p>
+        <div>
+          <h3>Concentrations</h3>
+          <ul>
+            @foreach (var concentration in undergraduate.Concentrations)
+            {
+              <li>@concentration</li>
+            }
+          </ul>
+        </div>
+      </div>
+    }
+  </div>
+  <h1>Graduate</h1>
+  <div id="GraduateDegrees">
+    @foreach (var graduate in Model.Graduate)
+    {
+      @if (!String.IsNullOrEmpty(graduate.Title))
+      {
+        <h2>
+          @graduate.Title
+          (@graduate.DegreeName.ToUpper())
+        </h2>
+      }
+      else
+      {
+        <h2>
+          @graduate.DegreeName.ToUpper()
+        </h2>
+      }
+      <div>
+        @if (!String.IsNullOrEmpty(graduate.Description))
+        {
+          <p>@graduate.Description</p>
+        }
+        @if (graduate.Concentrations != null)
+        {
+          <div>
+            <h3>Concentrations</h3>
+            <ul>
+              @foreach (var concentration in graduate.Concentrations)
+              {
+                <li>@concentration</li>
+              }
+            </ul>
+          </div>
+        }
+        @if (graduate.AvailableCertificates != null)
+        {
+          <h3>Available Certificates</h3>
+          <ul>
+            @foreach (var certificate in graduate.AvailableCertificates)
+            {
+              <li>@certificate</li>
+            }
+          </ul>
+        }
+      </div>
+    }
+  </div>
+</div>

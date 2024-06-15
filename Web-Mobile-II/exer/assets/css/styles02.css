@@ -1,0 +1,89 @@
+/* for asterisks */
+h1
+{
+    color: greenyellow;
+    font-size: 120px;
+    text-shadow: 1px 5px yellow;
+    position: relative;
+    bottom: 5vh;
+    left: 10vh;
+}
+
+/* for flowers */
+h2
+{
+    color: pink;
+    font-size: 30px;
+    font-weight: bold;
+    position: relative;
+    bottom: 20vh;
+    left: 15vh;
+}
+
+/* for displaying grid and border */
+.page-layout
+{
+    grid-template-columns: 1fr 1fr;
+    display: grid;
+    gap: 10px;
+    padding-left: 10px;
+    border-left: 50px solid transparent;
+}
+
+/* repeating flower container values */
+.flower
+{
+    background-color: green;
+    border-radius: 10px;
+    transition: 1s;
+}
+.flower:hover
+{
+    background-color: purple;
+    cursor: pointer;
+}
+
+/* first media query for viewports between 500px - 600px */
+@media screen and (min-width: 500px) and (max-width:600px)
+{
+
+    h1
+    {
+        bottom: -1vh;
+        left: 10vh;
+    }
+
+    h2
+    {
+        bottom: 15vh;
+    }
+
+    .page-layout
+    {
+        display: block;
+    }
+
+
+}
+
+/* second media query for viewports less than 500px */
+@media screen and (max-width: 500px)
+{
+
+    h1
+    {
+        bottom: 0vh;
+        left: 5vh;
+    }
+
+    h2
+    {
+        bottom: 15vh;
+        left: 10vh;
+    }
+
+    .page-layout
+    {
+        border: none;
+    }
+}

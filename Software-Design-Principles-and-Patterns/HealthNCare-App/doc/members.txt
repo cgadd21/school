@@ -1,0 +1,53 @@
+Name: Cooper Gadd
+
+Account: ctg7866@rit.edu
+
+Have you been on co-op? Yes
+
+List 1 to 3 programming languages you know: C#, Java, Go
+
+List 1 to 3 hobbies or interests: Coding, Programming, Developing
+
+
+Name: Matt Grober
+
+Account: mgrobe657
+
+Have you been on co-op? Yes
+
+List 1 to 3 programming languages you know: Java, Python, C#
+
+List 1 to 3 hobbies or interests: Automotive Repair, Skateboarding
+
+
+Name: VJ Goh
+
+Account: mcg4527
+
+Have you been on co-op? No
+
+List 1 to 3 programming languages you know: Java, Python, HTML
+
+List 1 to 3 hobbies or interests: Software, Design, Principles
+
+
+Name: Andrew Tark
+
+Account: ayt1844
+
+Have you been on co-op? No
+
+List 1 to 3 programming langauges you know: C#, C++, HTML
+
+List 1 to 3 hobbies or interests: Video games, Manga, Game Dev
+
+
+Name: Adam Abramson
+
+Account: aabramson2002
+
+Have you been on co-op? Yes
+
+List 1 to 3 programming langauges you know: C#, C++, JavaScript
+
+List 1 to 3 hobbies or interests: Video games, Sports, YouTube

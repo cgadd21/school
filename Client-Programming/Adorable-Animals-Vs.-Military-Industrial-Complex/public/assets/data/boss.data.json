@@ -1,0 +1,23 @@
+[
+  {
+    "description": "Bunnies",
+    "image": "./assets/images/bunnies.jpg",
+    "damage": 50,
+    "health": 100,
+    "squad": 5
+  },
+  {
+    "description": "Puppies",
+    "image": "./assets/images/puppies.jpg",
+    "damage": 100,
+    "health": 200,
+    "squad": 3
+  },
+  {
+    "description": "Tigers",
+    "image": "./assets/images/tigers.jpg",
+    "damage": 200,
+    "health": 150,
+    "squad": 2
+  }
+]

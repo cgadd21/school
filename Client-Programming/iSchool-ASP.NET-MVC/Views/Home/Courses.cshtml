@@ -1,0 +1,24 @@
+@* This file is used to display the Courses page of the website. *@
+@model List<Project3.Models.CoursesViewModel>
+@{
+  ViewData["Title"] = "Courses";
+}
+
+<section id="Courses">
+  <div id="CoursesDegree">
+    @foreach (var course in Model)
+    {
+      <h1>@course.DegreeName</h1>
+      <div>
+        <p>Semester: @course.Semester</p>
+        <h2>Courses</h2>
+        <ul>
+          @foreach (var courseName in course.Courses)
+          {
+            <li>@courseName</li>
+          }
+        </ul>
+      </div>
+    }
+  </div>
+</section>

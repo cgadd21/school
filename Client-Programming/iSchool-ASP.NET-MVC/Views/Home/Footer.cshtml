@@ -1,0 +1,25 @@
+@* This file is used to display the footer of the website. *@
+@model Project3.Models.FooterViewModel
+
+<section id="Footer">
+  <div id="Social">
+    <p>@Model.Social.Title</p>
+    <p>@Model.Social.Tweet</p>
+    <p>@Model.Social.By</p>
+    <p>@Model.Social.Twitter</p>
+    <p>@Model.Social.Facebook</p>
+  </div>
+  <div id="QuickLinks">
+    @foreach (var quickLink in Model.QuickLinks)
+    {
+      <a href="@quickLink.Href">@quickLink.Title</a>
+    }
+  </div>
+  <div id="Copyright">
+    <p>@Model.Copyright.Title</p>
+    @Html.Raw(Model.Copyright.Html)
+  </div>
+  <div id="News">
+    <a href=@Model.News>News</a>
+  </div>
+</section>

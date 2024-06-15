@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>DOM Placement</title>
+    <script>
+      function changeMe() {
+        let rEle = document.createElement("input");
+        rEle.setAttribute("type", "range");
+        //document.getElementsByTagName('body')[0].appendChild(rEle);
+        //document.getElementById('text').appendChild(rEle);
+        //$('text').appendChild(rEle);
+
+        //put in front of body (first thing)
+        //$$('body', 0).insertBefore(rEle, $$('body', 0).firstChild); //childNodes[0]
+
+        //put in front of the text
+        //$('text').insertBefore(rEle, $('text').firstChild);
+
+        //put it between the red and orange box
+        //$('everything').insertBefore(rEle, $('moreText'));
+
+        //put it before the hr tag
+        //$('everything').insertBefore(rEle, $$('hr', 0));
+
+        //remove orange box
+        //$('everything').removeChild($('moreText'));
+
+        //remove text
+        //$('moreText').removeChild($('moreText').firstChild);
+
+        //replace
+        //$('moreText').replaceChild(rEle, $('moreText').firstChild);
+
+        //clone
+        let c = $("everything").cloneNode(true); // t: everything inside f: only div (default)
+        //put it at the end
+        $$("body", 0).appendChild(c);
+      }
+
+      function $(id) {
+        return document.getElementById(id);
+      }
+
+      // $$ to return specific tag
+      // args - tag is the element ex: 'h1'
+      // 		- num is the index ex: 2
+      // return the dom element
+      function $$(tag, num) {
+        return document.getElementsByTagName(tag)[num];
+      }
+
+    </script>
+  </head>
+  <body>
+    <div id="everything">
+      <div id="buttons" style="position: absolute; top: 8px; left: 200px">
+        <button onclick="changeMe();">Do It!</button>
+      </div>
+
+      <div id="text" style="border: 2px solid red; width: 10em">Text</div>
+
+      <div id="moreText" style="border: 2px solid orange; width: 10em">
+        More text
+      </div>
+
+      <hr />
+    </div>
+  </body>
+</html>

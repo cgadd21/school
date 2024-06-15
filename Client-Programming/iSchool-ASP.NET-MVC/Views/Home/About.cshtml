@@ -1,0 +1,11 @@
+@* This file is used to display the About page of the website. *@
+@model Project3.Models.AboutViewModel
+@{
+  ViewData["Title"] = "About";
+}
+
+<section class="Card" id="About">
+  <p>@Model.Description</p>
+  <p>@Model.Quote</p>
+  <p>--@Model.QuoteAuthor</p>
+</section>

@@ -1,0 +1,15 @@
+@model MVC1.Models.YesDataViewModel
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>@Model.Title</p>
+<p>@Model.Description</p>
+
+<ul>
+    @for (var i = 1; i <= Model.HowMany; i++)
+    {
+        <li>Number: @i</li>
+    }
+</ul>

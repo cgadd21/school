@@ -1,0 +1,16 @@
+@* This file is used to display the News page of the website. *@
+@model Project3.Models.NewsViewModel
+@{
+  ViewData["Title"] = "News";
+}
+
+<div id="News">
+  @foreach (var news in Model.Older)
+  {
+    <div class="Card">
+      <h1>@news.Title</h1>
+      <p>@news.ToDateTime(news.Date).ToShortDateString()</p>
+      <p>@news.Description</p>
+    </div>
+  }
+</div>
