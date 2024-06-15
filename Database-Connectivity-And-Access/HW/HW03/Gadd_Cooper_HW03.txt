@@ -1,0 +1,36 @@
+mysql> SHOW PROCEDURE STATUS WHERE db Like "Candid%";
+--------------
+SHOW PROCEDURE STATUS WHERE db Like "Candid%"
+--------------
+
++-----------------+---------------------+-----------+----------+----------------+---------------------+---------------------+---------------+---------+----------------------+----------------------+--------------------+
+| Db              | Name                | Type      | Language | Definer        | Modified            | Created             | Security_type | Comment | character_set_client | collation_connection | Database Collation |
++-----------------+---------------------+-----------+----------+----------------+---------------------+---------------------+---------------+---------+----------------------+----------------------+--------------------+
+| candidateskills | get_candidate_skill | PROCEDURE | SQL      | root@localhost | 2023-10-31 14:05:01 | 2023-10-31 14:05:01 | DEFINER       |         | utf8mb4              | utf8mb4_0900_ai_ci   | utf8mb4_0900_ai_ci |
++-----------------+---------------------+-----------+----------+----------------+---------------------+---------------------+---------------+---------+----------------------+----------------------+--------------------+
+1 row in set (0.01 sec)
+
+mysql> SHOW CREATE PROCEDURE get_candidate_skill\G
+--------------
+SHOW CREATE PROCEDURE get_candidate_skill
+--------------
+
+*************************** 1. row ***************************
+           Procedure: get_candidate_skill
+            sql_mode: REAL_AS_FLOAT,PIPES_AS_CONCAT,IGNORE_SPACE,ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_ENGINE_SUBSTITUTION
+    Create Procedure: CREATE DEFINER=`root`@`localhost` PROCEDURE `get_candidate_skill`(IN p_candidate_id INT)
+BEGIN
+	SELECT candidate.candidate_ID AS "ID", 
+	        concat(lastName,", ", firstName) as "Candidate_Name",
+	          group_concat(skills.skill separator' | ') AS "Skill"
+	               From candidate JOIN candidate_skill USING(candidate_ID)
+	                JOIN skills USING(skill_ID)
+	                  WHERE candidate.candidate_ID = p_candidate_id
+	                       GROUP BY candidate.candidate_ID;
+END
+character_set_client: utf8mb4
+collation_connection: utf8mb4_0900_ai_ci
+  Database Collation: utf8mb4_0900_ai_ci
+1 row in set (0.00 sec)
+
+mysql> notee

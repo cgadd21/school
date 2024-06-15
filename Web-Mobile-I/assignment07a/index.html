@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 07a: Page Layout(extra credit)</title>
+    <style>
+    /* *** lorem ****************/
+        *{
+            border: 1px solid pink;
+            padding: 5px;
+        }
+    /* *** layout **************/
+        .container {
+            margin: auto;
+            width: 90%;
+            max-width: 1000px;
+	    }
+    /*	Grid Layout*/
+        .page-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;	
+            gap: 5px;
+	    }
+        header {
+            grid-row: 1/4;
+        }
+        article{
+            grid-column: 2/4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container page-layout">
+        <header>header</header>
+        <div id="pic1">pic1</div>
+        <div id="pic2">pic2</div>
+        <article>article</article>
+        <aside>aside</aside>
+        <footer>footer</footer>
+    </div> <!-- .container -->
+</body>
+</html>

@@ -1,0 +1,136 @@
+/* base */
+
+body
+{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: blue;
+    background-color: gainsboro;
+    margin: auto;
+    width: 90%;
+    max-width: 1000px;
+}
+header
+{
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    display: grid;
+}
+h1
+{
+    text-align: center;
+}
+p
+{
+    margin-bottom: 0px;
+}
+
+/* ids */
+
+#logo
+{
+    text-align: center;
+}
+
+#people
+{
+    font-size: 36px;
+    margin-top: 0px;
+}
+
+/* all form related css */
+
+form 
+{
+    margin: auto;
+    width: 90%;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+input[type="range"]
+{
+    margin-top: 0px;
+}
+fieldset
+{
+    display: flex;
+    flex-direction: column;
+    background-color: lightblue;
+    width: 70%;
+}
+legend
+{
+    color:black;
+}
+input[type="submit"]
+{
+    background-color: blue;
+    color: white;
+}
+input[type="number"]
+{
+    width: 8%;
+}
+
+/* all nav related css */
+
+nav
+{
+    grid-column: 2/8;
+}
+nav ul
+{
+    list-style: none;
+}
+nav a
+{
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+}
+nav li li a
+{
+    display: block;
+    font-weight: normal;
+}
+nav li
+{
+    background-color: white;
+}
+nav li li
+{
+    display: block;
+    float: none;
+    background-color: white;
+    border: 0;
+    padding: 0.5em 0 1em 0;
+}
+nav li ul
+{
+    display: none;
+    position: absolute;
+    font-weight: normal;
+    padding: 0.5em 0 1em 0;
+}
+nav li:hover ul
+{
+    display: block;
+    background-color: white;
+    padding: 5px;
+}
+nav li li a:hover
+{
+    padding: 0.2em 5px;
+    cursor:pointer;
+    color: blue;
+}
+nav > ul
+{
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid black;
+    padding: 5px;
+    background-color: white;
+}

@@ -1,0 +1,1 @@
+Quality software designs and architectures reflect software engineering principles that represent best contemporary practice. This course focuses on explicating these fundamental principles, examining a set of design and architecture patterns that embody the principles, and applying patterns appropriate to a design problem in a given context.

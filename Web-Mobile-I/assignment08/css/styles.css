@@ -1,0 +1,104 @@
+/* ****************************************
+ BASE
+ **************************************** */
+
+ body { 
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(to bottom, #b7deed 0%,#71ceef 50%,#21b4e2 51%,#b7deed 100%);
+    min-height: 100vh;
+    
+}
+img {
+    float:right;
+}
+h1 {
+    border: 5px solid #333333;
+    border-radius: 100px;
+    padding: 5px;
+}
+h2 { 
+    color: #333333;
+}
+h3 {
+    color: black;
+}
+p { 
+    color: whitesmoke;
+}
+strong { 
+    color: greenyellow;
+}
+em { 
+    color: black;
+}
+a:hover {
+    background-color: lightblue;
+}
+p em {
+    color: rebeccapurple;
+}
+
+/* ****************************************
+ Layout
+ **************************************** */
+
+.container {
+    margin: auto;
+    width: 90%;
+    max-width: 1000px;
+}
+.page-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;	
+    gap: 10px;
+}
+article{
+    grid-column: 1/3;
+    display: flex;
+    flex-direction: row;
+}
+ aside{
+    grid-column: 2/3;
+    grid-row: 1/4;
+}
+article > section {
+    padding: 10px;
+    flex-grow: 1;
+}
+article > h2 {
+    flex-direction: column;
+}
+aside > img {
+    float: right;
+    max-width: 100%;
+    height: 300px;
+}
+
+/* ****************************************
+ MODULES
+ **************************************** */
+
+.personal {
+   color: green;
+}
+.zebra > *:nth-child(even) {
+   background-color: silver;
+}
+@media(max-width: 1050px) {
+    header > img {
+        float:none;
+        margin: auto;
+        display: block;
+    }
+}
+@media (max-width: 750px) {
+  .page-layout {
+    display: block;
+  }
+  article {
+    display: block;
+  }
+  aside > img {
+    float: none;
+  }
+}
