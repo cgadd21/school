@@ -1,1 +1,0 @@
-Database applications have aspects that need to be considered when designing and developing larger-scale systems. In this course students will explore topics such as concurrent processing, scalability, performance, and security within the context of developing larger-scale data/base information processing systems.

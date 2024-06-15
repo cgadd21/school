@@ -1,9 +1,0 @@
-<!-- bottom of file that doesn't have any submenus -->
-<?php include('assets/inc/footer.php'); ?>
-
-    </div>
-
-    <?php include('assets/inc/scripts.php'); ?>
-    
-</body>
-</html>

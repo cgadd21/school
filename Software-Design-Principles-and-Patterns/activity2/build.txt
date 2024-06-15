@@ -1,3 +1,0 @@
-1. Run WeatherStation.java.
-2. Input either 1, 2 or 3 for each output form.
-3. Input ctrl + c to stop the program.

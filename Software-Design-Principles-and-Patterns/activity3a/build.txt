@@ -1,2 +1,0 @@
-1. Navigate to App.java.
-2. Run App.java.
