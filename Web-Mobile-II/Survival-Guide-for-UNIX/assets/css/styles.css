@@ -1,0 +1,241 @@
+body {
+    margin: 0;
+    font-family: 'Overpass Mono';
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* * * * * */
+/*  Header */
+/* * * * * */
+header.header-container {
+    background-color: black;
+    color: white;
+    padding: 0 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+header.header-container * {
+    display: inline;
+    padding: 0;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    vertical-align: middle;
+}
+header.header-container img {
+    margin: 0 0 0 20px;
+}
+
+a.menu-icon:hover {
+    background-color: white !important;
+    color: black;
+}
+
+header.header-container a.menu-icon {
+    font-size: 30px;
+    position: absolute;
+    padding: 10px 20px;
+    margin: 0;
+    top: 0;
+    right: 0;
+}
+
+/* * * * * * * * */
+/*  Dropdown nav */
+/* * * * * * * * */
+nav#main-nav {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    right: 20px;
+    top: 50px;
+    width: 300px;
+    background-color: white;
+    border: 1px solid grey;
+}
+
+nav#main-nav a {
+    color: black;
+    padding: 5px 0px 5px 10px;
+}
+
+nav#main-nav a:hover {
+    background-color: grey;
+    color: white
+}
+
+/* * * * * * * * * * * * * * * * * * * * * */
+/* UNIX survival guide banner on home page */
+/* * * * * * * * * * * * * * * * * * * * * */
+#headliner {
+    padding: 0;
+    margin: 0;
+    background: 
+        repeating-linear-gradient(
+            -55deg,
+            #fff200,
+            #fff200 10px,
+            #000000 10px,
+            #000000 20px
+        );
+    text-align: center;
+}
+
+/* headliner text */
+#headliner p {
+    color: white;
+    display: inline-block;
+    background-color: black;
+    width: auto;
+    margin: 0 auto;
+    padding: 2px 10px;
+}
+
+main {
+    min-height: 100vh;
+    border-top: 1px solid white;
+
+}
+
+/* * * * * * * * * * * * */
+/* Topic nav section */
+/* * * * * * * * * * * * */
+main.main-subsection {
+    background-color: white;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "one two";
+    gap: 0;
+
+}
+
+aside.aside-subsection {
+    background-color: black;
+}
+
+aside.aside-subsection, div.topic-content-container {
+    margin: 0;
+    padding: 0;
+}
+
+header.sidenav-subsection {
+    color: white;
+    padding-right: 20px;
+}
+
+
+div.sidenav-topics a {
+    padding: 5px 0px 5px 20px;
+    color: white;
+    display: block;
+}
+
+div.sidenav-topics a.active-topic {
+    background-color: #00B8D9;
+}
+
+/* * * * * * * * * */
+/*  General styles */
+/* * * * * * * * * */
+p.code {
+    background-color: rgb(141, 141, 141);
+    padding: 5px;
+    margin: 0;
+    font-style: italic;
+    border: 1px solid black;
+}
+
+.nodesktop {
+    display: none !important;
+}
+
+
+/* * * * * * * * * * * * */
+/* Topic content section */
+/* * * * * * * * * * * * */
+
+div.topic-content-container {
+    border: 5px solid #00B8D9;
+    background-image: url("https://images.unsplash.com/photo-1689028293810-731ea4d6df3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+section.topic-content {
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* * * * * * * * * * * */
+/*  Links List section */
+/* * * * * * * * * * * */
+div.page-list div.page-list-links {
+    display: flex;
+    flex-direction: column;
+}
+
+/* * * * * * * * */
+/* Footer styles */
+/* * * * * * * * */
+footer {
+    margin-top: auto;
+    color: white;
+    background-color: black;
+}
+
+footer p {
+    text-align: center;
+}
+
+@media screen and (min-width: 100px) and (max-width: 450px) {
+    .nomobile {
+        display: none !important;
+    }
+
+    .nodesktop {
+        display: block !important;
+    }
+
+    #main-nav {
+        display: none;
+        position: static;
+    }
+    
+    #main-nav a {
+        display: list-item;  
+    } 
+
+    main.main-subsection {
+        display: flex;
+        flex-direction: column;
+    }
+
+    aside.aside-subsection {
+        width: auto;
+        height: 100%;
+    }
+
+    header.sidenav-subsection, div.sidenav-subtopics {
+        text-align: center;
+        padding-right: 0px;
+    }
+    div.topic-content-container {
+        min-height: 100vh;
+    }
+
+    div.sidenav-subtopics a {
+        padding: 5px 0px;
+    }
+}
